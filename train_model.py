@@ -9,7 +9,7 @@ from keras.models import Sequential
 from keras.layers.convolutional import Conv2D, MaxPooling2D
 from keras.layers.core import Flatten, Dense
 from helpers import resize_to_fit
-
+import time
 
 LETTER_IMAGES_FOLDER = "extracted_letter_images"
 MODEL_FILENAME = "captcha_model.hdf5"
@@ -79,7 +79,8 @@ model.add(Dense(32, activation="softmax"))
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
 # Train the neural network
-model.fit(X_train, Y_train, validation_data=(X_test, Y_test), batch_size=32, epochs=10, verbose=1)
+model.fit(X_train, Y_train, validation_data=(X_test, Y_test), batch_size=32, epochs=1, verbose=1)
 
 # Save the trained model to disk
 model.save(MODEL_FILENAME)
+open('completed'+str(time.time())+'.txt', 'a').close()
